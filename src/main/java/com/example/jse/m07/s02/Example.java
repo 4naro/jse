@@ -20,6 +20,13 @@ public class Example {
      * @param args not used
      */
     public static void main(String[] args) {
+        try {
+            int x = max(null);
+            System.out.println(x);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
         withoutException();
 
         // The try-catch construct
@@ -111,7 +118,7 @@ public class Example {
      * @return the doubled input value
      * @throws IllegalArgumentException when negative input passed
      */
-    public static double by2ExUnchecked(double value) {
+    public static double by2ExUnchecked(double value) throws IllegalArgumentException {
         if (value < 0) {
             throw new IllegalArgumentException("Value should not be negative: " + value);
         }
@@ -133,4 +140,19 @@ public class Example {
 
         return value * 2;
     }
+
+    public static int max(int[] input) {
+        if (input == null || input.length == 0) {
+            throw new IllegalArgumentException("xyz!");
+        }
+
+        int result = input[0];
+        for (int i = 1; i < input.length; i++) {
+            if (input[i] > result) {
+                result = input[i];
+            }
+        }
+        return result;
+    }
+
 }
